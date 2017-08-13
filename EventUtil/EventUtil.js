@@ -1,7 +1,7 @@
 var EventUtil = {
   addHandler: function(element, type, handler){
     if(element.addEventListener){
-      // 第三个参数表示在冒泡阶段调用事件处理程序，默认值为false
+      // 第三个参数默认值为false，表示在冒泡阶段调用事件处理程序，
       element.addEventListener(type, handler, false)
     }else if(element.attachEvent){
       element.attachEvent("on"+type, handler)
@@ -11,7 +11,7 @@ var EventUtil = {
   },
   removeHandler: function(element, type, handler){
     if(element.removeHandler){
-      element.removeHandler(type, handler, false)
+      element.removeEventHandler(type, handler, false)
     }else if(element.detachEvent){
       element.detachEvent("on"+type, handler)
     }else {
