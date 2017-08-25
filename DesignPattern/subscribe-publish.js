@@ -1,8 +1,8 @@
-var EventCenter = (function(){
+var EventCenter = (function () {
   var listeners = {}
 
   // 注册事件
-  function on(event, handler){
+  function on(event, handler) {
     listeners[event] = listeners[event] || []
     listeners[event].push({
       handler
@@ -10,11 +10,11 @@ var EventCenter = (function(){
   }
 
   // 发布事件
-  function fire(event, args){
-    if(!listeners[event]){
-      return 
+  function fire(event, args) {
+    if (!listeners[event]) {
+      return
     }
-    for(var i in listeners[event]){
+    for (var i in listeners[event]) {
       listeners[event][i].handler(args)
     }
   }
