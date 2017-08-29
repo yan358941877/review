@@ -1,43 +1,53 @@
-// function merge(partArr, tempArr, s, m, e){
-//   var j = m + 1,
-//       k = s
-//   for(; s<=m && j<=e; k++){
-//       if(partArr[s] < partArr[j]){
-//           tempArr[k] = partArr[s++]
-//       }else {
-//           tempArr[k] = partArr[j++]
-//       }
-//   }
-//   while(s<=m){
-//       tempArr[k++] = partArr[s++]
-//   }
-//   while(j<=e){
-//       tempArr[k++] = partArr[j++]
-//   }
-// }
+function mergeSort(array, first, last, temp) {
 
-// function mSort(array, resultArr, s, e){
-//   var m = 0,
-//       tempArr = []
-//   if(s === e) resultArr[s] = array[s]
-//   else {
-//       m = Math.floor((s + e)/2)
-//       mSort(array, tempArr, s, m)
-//       mSort(array, tempArr, m+1, e)
-//       merge(tempArr, resultArr, s, m, e) 
-//   }
-// }
-// function mergeSort(array){
-//   var resultArr = new Array(array.length)
-//   mSort(array, resultArr, 0, array.length-1)
-//   return resultArr
-// }
+  if (first < last) {
+    var mid = Math.floor((first + last) / 2)
+    mergeSort(array, first, mid, temp)
+    mergeSort(array, mid + 1, last, temp)
+    merge(array, first, mid, last, temp)
+  }
+}
+
+function merge(array, first, mid, last, temp) {
+  var i = first,
+    j = mid + 1,
+    k = first
+  while (i <= mid && j <= last) {
+    if (array[j] < array[i]) {
+      temp[k++] = array[j];
+      j++;
+    } else {
+      temp[k++] = array[i];
+      i++;
+    }
+  }
+
+  while (i <= mid) {
+    temp[k++] = array[i++]
+  }
+  while (j <= last) {
+    temp[k++] = array[j++]
+  }
+  for(i = first; i<=last; i++){
+    array[i] = temp[i]
+  }
+}
+
+function Sort(array) {
+  var first = 0,
+    last = array.length - 1,
+    temp = new Array(array.length)
+  mergeSort(array, first, last, temp)
+}
+
+
+// 空间复杂度太高 
 
 function merge(left, right) {
   let result = [],
     i = 0,
     j = 0
-  while(i<left.length && j<right.length){
+  while (i < left.length && j < right.length) {
     if (left[i] <= right[j]) {
       result.push(left[i++])
     } else if (left[i] >= right[j]) {
@@ -58,8 +68,31 @@ function mergeSort(array) {
     return array
   }
   let mid = Math.ceil(array.length / 2),
-      left = array.slice(0, mid),
-      right = array.slice(mid)
+    left = array.slice(0, mid),
+    right = array.slice(mid)
   return merge(mergeSort(left), mergeSort(right))
 }
 
+
+while(line=readline()){
+  var lines = line.split(" ");
+  var len = lines.length;
+  var numArray = [];
+  var i = 0,
+      j =0,
+      max = 0,
+      temp = 0;
+  for(i=0; i<len; i++){
+      numArray.push(parseInt(lines[i]))
+  }
+for(i=0; i<len ; i++){
+      temp = 0;
+      for(j=1; j<=len; j++){
+          temp = temp + numArray[i+j-1];
+          if(temp > max){
+              max = temp;
+          }
+      }
+  }
+  print(max);
+}
