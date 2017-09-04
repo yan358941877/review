@@ -1,7 +1,10 @@
 var singleton = (function(){
   var instance
   function init(){
-    return {}
+    return {
+      name: 'yanxin',
+      age: '22'
+    }
   }
   return {
     getInstance: function(){
